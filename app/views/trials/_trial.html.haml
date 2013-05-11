@@ -1,0 +1,8 @@
+%tr(id="trial-#{trial.id}")
+  %td= l trial.created_at, :format => :long
+  %td= link_to trial.name, trial_path(trial, :format => :js), :remote => true
+  %td= l trial.start_on, :format => :long if trial.start_on
+  %td= l trial.stop_on, :format => :long if trial.stop_on
+  %td= trial.patients.count
+  %td
+    = link_to 'Delete', trial_path(trial, :format => :js), :method => :delete, :confirm => 'Are you sure?', :remote => true, :class => 'btn'

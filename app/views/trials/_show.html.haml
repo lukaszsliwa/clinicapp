@@ -1,0 +1,15 @@
+.modal.hide(id="trial-#{@trial.id}-modal")
+  .modal-header
+    %h3 #{@trial.name}
+  .modal-body
+    %table.choices.table.table-hover
+      %thead
+        %th Question
+        %th Suggested choice
+      %tbody
+        - @trial.choices.all.each do |choice|
+          %tr
+            %td= choice.question.try :text
+            %td= choice.suggested_value
+  .modal-footer
+    = link_to 'Close', '#', :class => 'btn', :data => {:dismiss => 'modal'}

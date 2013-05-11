@@ -1,0 +1,7 @@
+$('#new-trial-modal').modal('hide');
+$('#new-trial-modal').remove();
+- if @trial.errors.present?
+  $('body').append("#{escape_javascript(render :partial => 'trials/new', :locals => {:trial => @trial})}");
+  $('#new-trial-modal').modal('show');
+- else
+  $('table.trials tbody').prepend('#{escape_javascript(render :partial => 'trials/trial', :object => @trial)}');

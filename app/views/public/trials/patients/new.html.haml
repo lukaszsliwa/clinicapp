@@ -1,0 +1,24 @@
+= link_to raw('&laquo; Back to trials'), public_trials_path
+
+%h1= @trial.name
+%h3 Details
+
+= form_for @patient, :url => public_trial_patients_path(@trial) do |f|
+  - if (errors = f.object.errors.full_messages).present?
+    %ul.errors
+      - errors.each do |error|
+        %li= error
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :mobile
+    = f.text_field :mobile
+  %p
+    = f.label :address
+    = f.text_area :address, :rows => 2
+  %p
+    = f.label :email
+    = f.email_field :email
+  %p
+    = f.submit 'Next page', :class => 'btn btn-success btn-large'

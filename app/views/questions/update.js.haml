@@ -1,0 +1,7 @@
+$('#edit-question-#{@question.id}-modal').modal('hide');
+$('#edit-question-#{@question.id}-modal').remove();
+- if @question.errors.present?
+  $('body').append('#{escape_javascript(render :partial => 'questions/edit', :locals => {:question => @question})}');
+  $('#edit-question-#{@question.id}-modal').modal('show');
+- else
+  $('#question-#{@question.id}').replaceWith('#{escape_javascript(render :partial => 'questions/question', :object => @question)}');

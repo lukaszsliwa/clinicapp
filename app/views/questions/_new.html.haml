@@ -1,0 +1,8 @@
+#new-question-modal.modal.hide
+  .modal-header
+    %h3 New question
+  .modal-body
+    = render :partial => 'questions/form'
+  .modal-footer
+    = link_to_function 'Create', %{$('#new_question').submit()}, :class => 'btn'
+    = link_to 'Close', '#', :class => 'btn', :data => {:dismiss => 'modal'}

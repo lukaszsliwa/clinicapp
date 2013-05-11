@@ -1,0 +1,25 @@
+#new-trial-modal.modal.hide
+  .modal-header
+    %h3 New trial
+  .modal-body
+    = form_for @trial, :remote => true do |f|
+      - if (errors = f.object.errors.full_messages).present?
+        %ul.errors
+          - errors.each do |error|
+            %li= error
+      %p
+        = f.label :name
+        = f.text_field :name
+      %p
+        = f.label :start_on
+        = f.datetime_select :start_on
+      %p
+        = f.label :stop_on
+        = f.datetime_select :stop_on
+      %p
+        = f.label :choices
+        - Question.all.each do |question|
+          = render :partial => 'trials/choices', :locals => {:f => f, :question => question}
+  .modal-footer
+    = link_to_function 'Create', %{$('#new_trial').submit()}, :class => 'btn'
+    = link_to 'Close', '#', :data => {:dismiss => 'modal'}, :class => 'btn'

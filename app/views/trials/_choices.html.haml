@@ -1,0 +1,10 @@
+= f.fields_for :choices, Choice.new(:question_id => question.id) do |choice|
+  = choice.hidden_field :question_id
+  %p
+    .question= question.text
+    - if question.choices?
+      - question.choices.each do |value|
+        = choice.check_box :suggested_value, {:multiple => true}, value, nil
+        = value.capitalize
+    - else
+      = choice.text_field :suggested_value

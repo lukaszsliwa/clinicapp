@@ -1,0 +1,4 @@
+= link_to raw('&laquo; Back to trials'), public_trials_path
+
+%h1= @trial.name
+%h3 You are #{'not' unless @patient.eligible} eligible for the trial.

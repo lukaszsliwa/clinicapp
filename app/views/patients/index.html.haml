@@ -1,0 +1,25 @@
+%h1 Patients
+
+<form class="form-search">
+<input type="text" class="input-large search-query" placeholder="Patient name">
+<button type="submit" class="btn">Search</button>
+</form>
+
+%table.patients.table.table-hover
+  %thead
+    %th Created at
+    %th Name
+    %th Phone
+    %th E-mail
+    %th Trial
+    %th Eligible?
+  %tbody
+    - @patients.each do |patient|
+      %tr(id="patient-#{patient.id}")
+        %td= l patient.created_at, :format => :long if patient.created_at
+        %td= link_to patient.name, patient_path(patient, :format => :js), :remote => true
+        %td= patient.mobile
+        %td= patient.email
+        %td= patient.trial.try :name
+        %td= patient.eligible
+        %td= link_to 'Delete', patient_path(patient, :format => :js), :method => :delete, :confirm => 'Are you sure?', :remote => true, :class => 'btn'

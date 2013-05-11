@@ -1,0 +1,8 @@
+%h1 Trials
+
+%table.trials.table
+  %tbody
+    - @trials.each do |trial|
+      %tr(id="trial-#{trial.id}")
+        %td
+          = link_to trial.name, new_public_trial_patient_path(trial)

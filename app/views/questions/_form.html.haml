@@ -1,0 +1,35 @@
+= form_for @question, :remote => true do |f|
+  - if (errors = f.object.errors.full_messages).present?
+    %ul.errors
+      - errors.each do |error|
+        %li= error
+  %p
+    = f.label :text, 'Question text'
+    = f.text_field :text
+  %p
+    = f.label :type, 'Answer type'
+    - Question.types.keys.each do |type|
+      = f.radio_button :type, type, :checked => (type == f.object.type), :class => type
+      = type.capitalize
+  %p
+    .choices.hide
+      = f.label :choices
+      = link_to_add_choice 'Add choice', :class => 'btn' do
+        .choice
+          = f.text_field :choices, :multiple => true, :value => ''
+          = link_to_delete_choice 'Delete', :class => 'btn'
+      - if f.object.choices.present?
+        - f.object.choices.each do |choice|
+          .choice
+            = f.text_field :choices, :multiple => true, :value => choice
+            = link_to_delete_choice 'Delete', :class => 'btn'
+      - else
+        .choice
+          = f.text_field :choices, :multiple => true, :value => ''
+          = link_to_delete_choice 'Delete', :class => 'btn'
+:javascript
+  $('input.text, input.area, input.choices').click(function() {
+    $('div.text, div.area, div.choices').addClass('hide');
+    $('div.' + $(this).attr('class')).removeClass('hide');
+  });
+  $('input.#{@question.type}').click();

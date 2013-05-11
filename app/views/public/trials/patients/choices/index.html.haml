@@ -1,0 +1,36 @@
+%h1 Make a test
+
+%h4{:style => 'text-align: center'}
+  #{params[:page].to_i} / #{Question.count} questions left
+
+- @choices.each do |choice|
+  - question = choice.question
+  = form_for choice, :url => public_trial_patient_choice_path(@trial, @patient, choice), :method => :put do |f|
+    = hidden_field_tag 'page', params[:page]
+    %p
+      = question.text
+    %p
+      - if question.choices?
+        %ul.choices{:style => 'list-style-type: none'}
+          - question.choices.each do |value|
+            %li.choice
+              = f.check_box :patient_value, {:multiple => true}, value, nil
+              = value.capitalize
+      - elsif question.text?
+        = f.text_field :patient_value
+      - elsif question.area?
+        = f.text_area :patient_value, :rows => 2
+    = f.submit 'Next page', :class => 'btn btn-success btn-large'
+    - if params[:page].to_i > 1
+      or
+      = link_to 'Previous page', public_trial_patient_choices_path(@trial, @patient, :page => params[:page].to_i-1)
+
+:javascript
+  /*window.onbeforeunload = function() {
+    return 'You did not finish a trial. Are you sure you want to leave?';
+  }
+  $(document).ready(function() {
+    $('a[rel!=ext]').click(function() { window.onbeforeunload = null; });
+    $('form').submit(function() { window.onbeforeunload = null; });
+  });*/
+

@@ -1,0 +1,4 @@
+$('#edit-question-#{@question.id}-modal').modal('hide');
+$('#edit-question-#{@question.id}-modal').remove();
+$('body').append('#{escape_javascript(render :partial => 'questions/edit', :locals => {:question => @question})}');
+$('#edit-question-#{@question.id}-modal').modal('show');
