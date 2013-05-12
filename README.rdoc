@@ -4,6 +4,14 @@ ClinicApp provides possibility for companies to create set of questions for clin
 type of data: Patient, Trial and Question. Fourth is Choice which exists as an embedded document for Patient and Trial
 model.
 
+= Public area
+
+Type http://localhost:3000/public/trials/ to show public open trials.
+
+= Admin area
+
+Type http://localhost:3000/ to see twitter bootstrap interface to manage patients, trials and questions.
+
 == Details
 
 * mongodb 2.4.1
@@ -14,7 +22,7 @@ model.
 
 == clockwork
 
-If company want to remind patient who has not finished a test it run clockwork. Every day at 00:10, it will be sending
+If company want to remind patient who has not finished a test just run clockwork. Every day at 00:10, it will be sending
 reminder to all previous day patients who did not finish a test.
 
 Author: Łukasz Śliwa
