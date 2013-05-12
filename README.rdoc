@@ -1,4 +1,4 @@
-= Welcome ClinicApp
+= Welcome to ClinicApp
 
 ClinicApp provides possibility for companies to create set of questions for clinic patients. ClinicApp has three basic
 type of data: Patient, Trial and Question. Fourth is Choice which exists as an embedded document for Patient and Trial
