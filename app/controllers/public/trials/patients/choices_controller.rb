@@ -13,7 +13,7 @@ class Public::Trials::Patients::ChoicesController < Public::Trials::Patients::Ap
       if @choice.update_attributes(params[:choice])
         format.html { redirect_to public_trial_patient_choices_path(@trial, :page => params[:page].to_i + 1) }
       else
-        format.html { redirect_to :back, :notice => 'You choice is invalid.' }
+        format.html { redirect_to public_trial_patient_choices_path(@trial, :page => params[:page]), :notice => 'Your choice is invalid.' }
       end
     end
   end
