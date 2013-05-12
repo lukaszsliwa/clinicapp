@@ -1,3 +1,5 @@
-PatientMailer#remind
+Hi,
 
-<%= @greeting %>, find me in app/views/app/views/patient_mailer/remind.text.erb
+Looks like you did not finish a test. To continue a test use like below:
+
+<%= public_trial_patient_choices_url(@trial, @patient, :host => 'clinickapp.com', :page => 1, :token => @patient.token, :patient_id => @patient.id) %>

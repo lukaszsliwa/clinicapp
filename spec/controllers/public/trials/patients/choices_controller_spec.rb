@@ -23,6 +23,10 @@ describe Public::Trials::Patients::ChoicesController do
       get :index, {:trial_id => trial, :page => 4}, {:patient_id => @patient.id}
       response.should redirect_to(public_trial_patient_path(trial))
     end
+    it 'should use patient_id and token to find patient' do
+      get :index, {:trial_id => trial, :page => 1, :patient_id => @patient.id, :token => @patient.token}
+      response.should render_template('public/trials/patients/choices/index')
+    end
   end
   describe '#update' do
     it 'should update update text choice' do
