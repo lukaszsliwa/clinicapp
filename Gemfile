@@ -21,5 +21,6 @@ group :test do
   gem 'simplecov'
   gem 'database_cleaner'
   gem 'mocha'
+  gem 'forgery'
   gem 'factory_girl_rails'
 end
