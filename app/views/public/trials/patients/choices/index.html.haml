@@ -5,7 +5,7 @@
 
 - @choices.each do |choice|
   - question = choice.question
-  = form_for choice, :url => public_trial_patient_choice_path(@trial, @patient, choice), :method => :put do |f|
+  = form_for choice, :url => public_trial_patient_choice_path(@trial, choice), :method => :put do |f|
     = hidden_field_tag 'page', params[:page]
     %p
       = question.text
@@ -23,7 +23,7 @@
     = f.submit 'Next page', :class => 'btn btn-success btn-large'
     - if params[:page].to_i > 1
       or
-      = link_to 'Previous page', public_trial_patient_choices_path(@trial, @patient, :page => params[:page].to_i-1)
+      = link_to 'Previous page', public_trial_patient_choices_path(@trial, :page => params[:page].to_i-1)
 
 :javascript
   /*window.onbeforeunload = function() {

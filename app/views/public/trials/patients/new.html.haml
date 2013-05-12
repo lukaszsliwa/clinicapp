@@ -3,7 +3,7 @@
 %h1= @trial.name
 %h3 Details
 
-= form_for @patient, :url => public_trial_patients_path(@trial) do |f|
+= form_for @patient, :url => public_trial_patient_path(@trial) do |f|
   - if (errors = f.object.errors.full_messages).present?
     %ul.errors
       - errors.each do |error|

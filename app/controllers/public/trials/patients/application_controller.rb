@@ -2,6 +2,6 @@ class Public::Trials::Patients::ApplicationController < Public::Trials::Applicat
   before_filter :patient
 
   def patient
-    @patient ||= Patient.find(params[:patient_id])
+    @patient ||= Patient.not_finished.find(session[:patient_id])
   end
 end

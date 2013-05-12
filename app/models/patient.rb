@@ -17,10 +17,14 @@ class Patient
   validates :address, :presence => true
   validates :email, :presence => true
 
+  scope :finished, where(:finished => true)
+  scope :not_finished, where(:finished => false)
+
   embeds_many :choices, :as => :choiceable
 
   index 'choices.id' => 1
   index({:eligible => 1, :trial_id => 1})
+  index :finished => 1
   index :token => 1
 
   belongs_to :trial
