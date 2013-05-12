@@ -2,7 +2,7 @@ class PatientsController < ApplicationController
   before_filter :patient, :only => [:show, :destroy]
 
   def index
-    @patients = Patient.all
+    @patients = Patient.order_by('created_at desc').page params[:page]
   end
 
   def show
