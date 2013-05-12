@@ -9,8 +9,7 @@ class Choice
 
   embedded_in :choiceable, :polymorphic => true
 
-  # Mongoid fails on embedded document callback
-  # before_create :copy_question_text
+  before_create :copy_question_text
 
   def copy_question_text
     self.question_text = question.text
