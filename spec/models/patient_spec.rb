@@ -62,4 +62,20 @@ describe Patient do
       }.to change(subject, :finished).from(false).to(true)
     end
   end
+  describe '.remind_if_not_finished' do
+    before do
+      @patient1 = create(:not_finished_patient, :created_at => Date.yesterday)
+      @patient2 = create(:not_finished_patient, :created_at => Date.yesterday)
+      @patient3 = create(:not_finished_patient)
+      PatientMailer.remind(@patient1).deliver
+      PatientMailer.remind(@patient2).deliver
+      @mail = mock('mail')
+      @mail.stubs(:deliver => true)
+    end
+    it 'should send reminder' do
+      PatientMailer.expects(:remind).with(@patient1).returns @mail
+      PatientMailer.expects(:remind).with(@patient2).returns @mail
+      Patient.remind_if_not_finished
+    end
+  end
 end

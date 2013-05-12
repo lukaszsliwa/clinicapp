@@ -15,6 +15,7 @@ gem 'haml', '4.0.2'
 gem 'jquery-rails'
 gem 'kaminari', '0.14.1'
 gem 'simple_enum'
+gem 'clockwork'
 
 group :test do
   gem 'rspec-rails'

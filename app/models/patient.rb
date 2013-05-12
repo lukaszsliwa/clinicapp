@@ -17,6 +17,7 @@ class Patient
   validates :address, :presence => true
   validates :email, :presence => true
 
+  scope :yesterday, where(:created_at.gte => Date.yesterday, :created_at.lte => Date.today)
   scope :recent, order_by('created_at desc')
   scope :finished, where(:finished => true)
   scope :not_finished, where(:finished => false)
@@ -65,5 +66,11 @@ class Patient
   def finish!
     self.finished = true
     eligible!
+  end
+
+  def self.remind_if_not_finished
+    Patient.not_finished.yesterday.each do |patient|
+      PatientMailer.remind(patient).deliver
+    end
   end
 end
