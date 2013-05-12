@@ -17,9 +17,16 @@ class Patient
   validates :address, :presence => true
   validates :email, :presence => true
 
+  scope :recent, order_by('created_at desc')
   scope :finished, where(:finished => true)
   scope :not_finished, where(:finished => false)
-
+  scope :search, ->(params = {}) do
+    params.delete :trial_id if params[:trial_id].blank?
+    where params.slice :eligible, :finished, :trial_id
+  end
+  scope :name_query, ->(params = {}) do
+    where :name => /#{params[:q]}/ unless params[:q].blank?
+  end
   embeds_many :choices, :as => :choiceable
 
   index 'choices.id' => 1

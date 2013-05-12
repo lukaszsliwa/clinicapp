@@ -5,6 +5,9 @@ class Choice
   field :suggested_value
   field :patient_value
 
+  attr_accessible :patient_value
+  attr_accessible :question_id, :question_text, :suggested_value, :as => :admin
+
   belongs_to :question
 
   embedded_in :choiceable, :polymorphic => true

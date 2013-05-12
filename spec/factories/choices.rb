@@ -3,7 +3,6 @@ FactoryGirl.define do
     question
     question_text { Forgery(:lorem_ipsum).sentences(1, :random => true) }
     suggested_value 88
-    patient_value 88
     factory :trial_choice do
       choiceable :factory => :trial
     end
@@ -11,13 +10,13 @@ FactoryGirl.define do
       choiceable :factory => :patient
     end
     factory :text_choice do
-      patient_value 'Test'
+      suggested_value 'Test'
     end
     factory :area_choice do
-      patient_value 'Test\n\n\nTest'
+      suggested_value 'Test\n\n\nTest'
     end
     factory :choices_choice do
-      patient_value %w{A B C}
+      suggested_value %w{A B C}
     end
   end
 end

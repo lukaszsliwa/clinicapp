@@ -24,13 +24,3 @@
     - if params[:page].to_i > 1
       or
       = link_to 'Previous page', public_trial_patient_choices_path(@trial, :page => params[:page].to_i-1)
-
-:javascript
-  /*window.onbeforeunload = function() {
-    return 'You did not finish a trial. Are you sure you want to leave?';
-  }
-  $(document).ready(function() {
-    $('a[rel!=ext]').click(function() { window.onbeforeunload = null; });
-    $('form').submit(function() { window.onbeforeunload = null; });
-  });*/
-
