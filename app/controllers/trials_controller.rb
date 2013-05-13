@@ -1,12 +1,13 @@
 class TrialsController < ApplicationController
-  before_filter :trial, :only => [:show, :destroy]
+  before_filter :trial, :only => [:show, :edit, :update, :destroy]
 
   def index
     @trials = Trial.order_by('created_at desc').page params[:page]
   end
 
   def new
-    @trial = Trial.new
+    @trial = Trial.new(:stop_on => 31.days.from_now)
+    @trial.build_questions
   end
 
   def show
@@ -14,6 +15,14 @@ class TrialsController < ApplicationController
 
   def create
     @trial = Trial.new
+    @trial.assign_attributes(params[:trial], :as => :admin)
+    @trial.save
+  end
+
+  def edit
+  end
+
+  def update
     @trial.assign_attributes(params[:trial], :as => :admin)
     @trial.save
   end

@@ -20,4 +20,12 @@ class Trial
   }
 
   accepts_nested_attributes_for :choices, :cascade_callbacks => true
+
+  def build_questions
+    Question.all.each do |question|
+      choice = Choice.new
+      choice.question = question
+      self.choices << choice
+    end
+  end
 end

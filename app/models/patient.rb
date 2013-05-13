@@ -15,7 +15,7 @@ class Patient
   validates :name, :presence => true
   validates :mobile, :presence => true
   validates :address, :presence => true
-  validates :email, :presence => true
+  validates :email, :presence => true, :confirmation => true
 
   scope :yesterday, where(:created_at.gte => Date.yesterday, :created_at.lte => Date.today)
   scope :recent, order_by('created_at desc')

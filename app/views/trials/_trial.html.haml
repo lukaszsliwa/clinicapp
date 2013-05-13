@@ -5,4 +5,5 @@
   %td= l trial.stop_on, :format => :long if trial.stop_on
   %td= trial.patients.count
   %td
+    = link_to 'Edit', edit_trial_path(trial, :format => :js), :remote => true, :class => 'btn'
     = link_to 'Delete', trial_path(trial, :format => :js), :method => :delete, :confirm => 'Are you sure?', :remote => true, :class => 'btn'

@@ -1,0 +1,17 @@
+= form_for @trial, :remote => true do |f|
+  - if (errors = f.object.errors.full_messages).present?
+    %ul.errors
+      - errors.each do |error|
+        %li= error
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :start_on
+    = f.datetime_select :start_on
+  %p
+    = f.label :stop_on
+    = f.datetime_select :stop_on
+  %p
+    = f.label :choices
+    = render :partial => 'trials/choices', :locals => {:f => f}

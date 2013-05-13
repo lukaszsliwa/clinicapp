@@ -19,7 +19,7 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          %a.brand{:href => "#"} ClinicApp
+          %a.brand{:href => "/"} ClinicApp
           .container.nav-collapse
             %ul.nav
               %li
@@ -28,12 +28,11 @@
                   Patients
               %li= link_to 'Trials', trials_path
               %li= link_to "Questions", questions_path
+              %li
+                = link_to public_trials_path, :title => 'Public site' do
+                  %i.icon-globe
           / /.nav-collapse
     .container{:style => "margin-top: 50px"}
       .row
         = bootstrap_flash
         = yield
-      / /row
-      %footer
-        %p © Company 2013
-    / /container

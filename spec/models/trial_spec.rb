@@ -29,4 +29,16 @@ describe Trial do
       end
     end
   end
+  describe '#build_questions' do
+    before do
+      @question1 = create(:question)
+      @question2 = create(:question)
+      @trial = build(:trial)
+    end
+    it 'should build two questions for the trial' do
+      expect {
+        @trial.build_questions
+      }.to change { @trial.choices.size }.from(0).to(2)
+    end
+  end
 end

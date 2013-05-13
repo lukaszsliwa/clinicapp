@@ -26,6 +26,12 @@ describe TrialsController do
       }.to change(Trial, :count).by 1
     end
   end
+  describe '#update' do
+    it 'should create new trial' do
+      put :update, :id => @trial, :trial => attributes_for(:trial), :format => :js
+      response.should render_template('trials/update')
+    end
+  end
   describe '#destroy' do
     it 'should delete trial' do
       expect {
