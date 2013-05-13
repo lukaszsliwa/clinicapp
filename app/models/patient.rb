@@ -28,7 +28,7 @@ class Patient
   scope :name_query, ->(params = {}) do
     where :name => /#{params[:q]}/ unless params[:q].blank?
   end
-  embeds_many :choices, :as => :choiceable
+  embeds_many :choices, :as => :choiceable, :cascade_callbacks => true
 
   index 'choices.id' => 1
   index({:eligible => 1, :trial_id => 1})

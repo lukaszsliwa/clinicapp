@@ -13,7 +13,9 @@ class TrialsController < ApplicationController
   end
 
   def create
-    @trial = Trial.create(params[:trial])
+    @trial = Trial.new
+    @trial.assign_attributes(params[:trial], :as => :admin)
+    @trial.save
   end
 
   def destroy

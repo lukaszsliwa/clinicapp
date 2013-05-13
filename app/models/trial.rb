@@ -19,5 +19,5 @@ class Trial
     where(:start_on.lte => current, :stop_on.gte => current)
   }
 
-  accepts_nested_attributes_for :choices
+  accepts_nested_attributes_for :choices, :cascade_callbacks => true
 end

@@ -1,5 +1,5 @@
-= f.fields_for :choices, Choice.new(:question_id => question.id) do |choice|
-  = choice.hidden_field :question_id
+= f.fields_for :choices, Choice.new do |choice|
+  = choice.hidden_field :question_id, :value => question.id
   %p
     .question= question.text
     - if question.choices?
