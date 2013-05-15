@@ -17,6 +17,7 @@
     %th Name
     %th Phone
     %th E-mail
+    %th Address
     %th Trial
     %th Eligible
     %th Finished
@@ -27,6 +28,7 @@
         %td= link_to patient.name, admin_patient_path(patient, :format => :js), :remote => true
         %td= patient.mobile
         %td= patient.email
+        %td= patient.address
         %td= patient.trial.try :name
         %td= patient.eligible
         %td= patient.finished
