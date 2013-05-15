@@ -1,5 +1,5 @@
 class Public::TrialsController < Public::ApplicationController
   def index
-    @trials = Trial.open.all
+    @trials = Trial.active.all
   end
 end

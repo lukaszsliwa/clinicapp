@@ -7,6 +7,13 @@
     = f.label :name
     = f.text_field :name
   %p
+    = f.radio_button :type, :opened, :checked => true
+    Open
+    = f.radio_button :type, :closed
+    Closed
+    = f.radio_button :type, :start_stop
+    Start/stop
+  %p
     = f.label :start_on
     = f.datetime_select :start_on
   %p

@@ -1,4 +1,0 @@
-$('#patient-#{@patient.id}-modal').modal('hide');
-$('#patient-#{@patient.id}-modal').remove();
-$('body').append('#{escape_javascript(render :partial => 'patients/show')}');
-$('#patient-#{@patient.id}-modal').modal('show');

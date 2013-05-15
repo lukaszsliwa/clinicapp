@@ -1,6 +1,7 @@
 %tr(id="trial-#{trial.id}")
   %td= l trial.created_at, :format => :long
   %td= link_to trial.name, admin_trial_path(trial, :format => :js), :remote => true
+  %td= trial.type
   %td= l trial.start_on, :format => :long if trial.start_on
   %td= l trial.stop_on, :format => :long if trial.stop_on
   %td= trial.patients.count

@@ -6,3 +6,9 @@
       %tr(id="trial-#{trial.id}")
         %td
           = link_to trial.name, new_public_trial_patient_path(trial)
+        %td
+          - if trial.start_stop?
+            = l trial.start_on, :format => :long if trial.start_on
+            \-
+            = l trial.stop_on, :format => :long if trial.stop_on
+

@@ -1,4 +1,0 @@
-$('#trial-#{@trial.id}-modal').modal('hide');
-$('#trial-#{@trial.id}-modal').remove();
-$('body').append('#{escape_javascript(render :partial => 'trials/show')}');
-$('#trial-#{@trial.id}-modal').modal('show');
