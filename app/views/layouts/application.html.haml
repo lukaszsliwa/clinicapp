@@ -23,10 +23,10 @@
           .container.nav-collapse
             %ul.nav
               %li
-                = link_to patients_path do
+                = link_to admin_patients_path do
                   %i.icon-group
                   Patients
-              %li= link_to 'Trials', trials_path
+              %li= link_to 'Trials', admin_trials_path
               %li
                 = link_to public_trials_path, :title => 'Public site' do
                   %i.icon-globe

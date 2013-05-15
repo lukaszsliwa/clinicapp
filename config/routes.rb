@@ -1,7 +1,9 @@
 Clinicapp::Application.routes.draw do
-  resources :patients
-  resources :trials
-  resources :questions
+  namespace :admin do
+    resources :patients
+    resources :trials
+    resources :questions
+  end
 
   namespace :public do
     resources :trials, :only => :index do
@@ -11,5 +13,7 @@ Clinicapp::Application.routes.draw do
     end
   end
 
-  root :to => 'patients#index'
+  match '/admin' => 'admin/patients#index'
+
+  root :to => 'public/trials#index'
 end

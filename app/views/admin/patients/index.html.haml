@@ -1,0 +1,33 @@
+%h1 Patients
+
+.pull-left
+  = form_tag admin_patients_path, :method => :get, :class => 'form-search' do
+    = text_field_tag 'q', params[:q], :class => 'input-large, search-query', :placeholder => 'Patient...'
+    = submit_tag 'Search', :class => 'btn btn-large'
+.pull-right
+  = form_tag admin_patients_path, :method => :get, :class => 'form-search' do
+    = select_tag 'trial_id', options_for_select(Trial.all.map {|trial| [trial.name, trial.id]}, params[:trial_id]), :prompt => 'All trials'
+    = select_tag 'eligible', options_for_select([['Eligible', 'true'], ['Not eligible', 'false']], params[:eligible])
+    = select_tag 'finished', options_for_select([['Finished', 'true'], ['Not finished', 'false']], params[:finished])
+    = submit_tag 'Filter', :class => 'btn btn-large'
+
+%table.patients.table.table-hover
+  %thead
+    %th Created at
+    %th Name
+    %th Phone
+    %th E-mail
+    %th Trial
+    %th Eligible
+    %th Finished
+  %tbody
+    - @patients.each do |patient|
+      %tr(id="patient-#{patient.id}")
+        %td= l patient.created_at, :format => :long if patient.created_at
+        %td= link_to patient.name, admin_patient_path(patient, :format => :js), :remote => true
+        %td= patient.mobile
+        %td= patient.email
+        %td= patient.trial.try :name
+        %td= patient.eligible
+        %td= patient.finished
+        %td= link_to 'Delete', admin_patient_path(patient, :format => :js), :method => :delete, :confirm => 'Are you sure?', :remote => true, :class => 'btn'

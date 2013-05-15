@@ -1,0 +1,15 @@
+%h1 Trials
+
+= link_to 'New trial', new_admin_trial_path, :class => 'btn'
+
+%table.trials.table.table-hover
+  %thead
+    %th Created at
+    %th Name
+    %th Start on
+    %th Stop on
+    %th Patients
+  %tbody
+    = render :partial => 'admin/trials/trial', :collection => @trials
+
+= paginate @trials
