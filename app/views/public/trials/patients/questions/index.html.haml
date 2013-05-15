@@ -1,0 +1,29 @@
+%h1 Make a test
+
+- page = params[:page].to_i
+%h4{:style => 'text-align: center'}
+  #{page} / #{@trial.questions.count} questions left
+  %br
+  %br
+  Eligible? #{@patient.eligible_now?(0, page-1) ? 'Yes' : 'No'}
+
+- @questions.each do |question|
+  = form_for question, :url => public_trial_patient_question_path(@trial, question), :method => :put do |f|
+    = hidden_field_tag 'page', page
+    %p
+      = question.text
+    %p
+      - if question.choices?
+        %ul.choices{:style => 'list-style-type: none'}
+          - question.choices.each do |value|
+            %li.choice
+              = f.check_box :patient_answer, {:multiple => true}, value, nil
+              = value.capitalize
+      - elsif question.text?
+        = f.text_field :patient_answer
+      - elsif question.area?
+        = f.text_area :patient_answer, :rows => 2
+    = f.submit 'Next page', :class => 'btn btn-success btn-large'
+    - if page > 1
+      or
+      = link_to 'Previous page', public_trial_patient_questions_path(@trial, :page => page-1)

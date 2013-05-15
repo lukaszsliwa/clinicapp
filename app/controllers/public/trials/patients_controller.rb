@@ -10,7 +10,7 @@ class Public::Trials::PatientsController < Public::Trials::ApplicationController
     respond_to do |format|
       if @patient.save
         session[:patient_id] = @patient.id
-        format.html { redirect_to public_trial_patient_choices_path(@trial, :page => 1) }
+        format.html { redirect_to public_trial_patient_questions_path(@trial, :page => 1) }
       else
         format.html { render :action => :new }
       end

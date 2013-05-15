@@ -1,8 +1,0 @@
-.modal.hide(id="edit-trial-#{@trial.id}-modal")
-  .modal-header
-    %h3 Edit trial
-  .modal-body
-    = render :partial => 'trials/form'
-  .modal-footer
-    = link_to_function 'Update', %{$('.edit_trial').submit()}, :class => 'btn'
-    = link_to 'Close', '#', :data => {:dismiss => 'modal'}, :class => 'btn'

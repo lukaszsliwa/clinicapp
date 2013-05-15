@@ -1,8 +1,0 @@
-#new-trial-modal.modal.hide
-  .modal-header
-    %h3 New trial
-  .modal-body
-    = render :partial => 'trials/form'
-  .modal-footer
-    = link_to_function 'Create', %{$('#new_trial').submit()}, :class => 'btn'
-    = link_to 'Close', '#', :data => {:dismiss => 'modal'}, :class => 'btn'

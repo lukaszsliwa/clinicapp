@@ -12,13 +12,13 @@
     %table.choices.table.table-hover
       %thead
         %th Question
-        %th Patient choice
-        %th Suggested value
+        %th Patient answer
+        %th Correct answer
       %tbody
-        - @patient.choices.all.each do |choice|
+        - @patient.questions.all.each do |question|
           %tr
-            %td= choice.question_text
-            %td= choice.patient_value
-            %th= choice.suggested_value
+            %td= question.text
+            %td= question.patient_answer
+            %th= question.correct_answer
   .modal-footer
     = link_to 'Close', '#', :class => 'btn', :data => {:dismiss => 'modal'}

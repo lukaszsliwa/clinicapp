@@ -7,7 +7,6 @@ class TrialsController < ApplicationController
 
   def new
     @trial = Trial.new(:stop_on => 31.days.from_now)
-    @trial.build_questions
   end
 
   def show
@@ -16,7 +15,13 @@ class TrialsController < ApplicationController
   def create
     @trial = Trial.new
     @trial.assign_attributes(params[:trial], :as => :admin)
-    @trial.save
+    respond_to do |format|
+      if @trial.save
+        format.html { redirect_to trials_path }
+      else
+        format.html { render :action => :new}
+      end
+    end
   end
 
   def edit
@@ -24,7 +29,13 @@ class TrialsController < ApplicationController
 
   def update
     @trial.assign_attributes(params[:trial], :as => :admin)
-    @trial.save
+    respond_to do |format|
+      if @trial.save
+        format.html { redirect_to trials_path }
+      else
+        format.html { render :action => :edit}
+      end
+    end
   end
 
   def destroy

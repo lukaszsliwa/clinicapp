@@ -1,0 +1,2 @@
+= f.fields_for :questions, question, :child_index => index do |q|
+  = render :partial => 'trials/question_form', :locals => {:f => q, :index => index}

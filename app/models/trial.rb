@@ -10,7 +10,7 @@ class Trial
   validates :name, :presence => true
 
   has_many :patients
-  embeds_many :choices, :as => :choiceable
+  embeds_many :questions, :as => :questionable
 
   index 'choices.id' => 1
   index({:start_on => 1, :stop_on => 1})
@@ -19,13 +19,5 @@ class Trial
     where(:start_on.lte => current, :stop_on.gte => current)
   }
 
-  accepts_nested_attributes_for :choices, :cascade_callbacks => true
-
-  def build_questions
-    Question.all.each do |question|
-      choice = Choice.new
-      choice.question = question
-      self.choices << choice
-    end
-  end
+  accepts_nested_attributes_for :questions, :allow_destroy => true
 end

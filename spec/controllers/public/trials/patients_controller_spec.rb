@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Public::Trials::PatientsController do
-  let(:trial) { create(:trial_with_choices) }
+  let(:trial) { create(:trial_with_questions) }
   describe '#new' do
     it 'should get a new patient' do
       get :new, {:trial_id => trial.id}
@@ -14,7 +14,7 @@ describe Public::Trials::PatientsController do
       it 'should create new patient and save id into the session' do
         expect {
           post :create, :trial_id => trial, :patient => attributes_for(:patient)
-          response.should redirect_to(public_trial_patient_choices_path(trial, :page => 1))
+          response.should redirect_to(public_trial_patient_questions_path(trial, :page => 1))
         }.to change(Patient, :count).by 1
         session[:patient_id].should eql assigns(:patient).id
       end

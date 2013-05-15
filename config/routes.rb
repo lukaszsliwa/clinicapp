@@ -6,7 +6,7 @@ Clinicapp::Application.routes.draw do
   namespace :public do
     resources :trials, :only => :index do
       resource :patient, :only => [:new, :create, :show], :controller => 'trials/patients' do
-        resources :choices, :only => [:index, :update], :controller => 'trials/patients/choices'
+        resources :questions, :only => [:index, :update], :controller => 'trials/patients/questions'
       end
     end
   end

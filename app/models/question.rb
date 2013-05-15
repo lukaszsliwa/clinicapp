@@ -5,7 +5,13 @@ class Question
 
   field :text, type: String
   field :choices, type: Array, default: []
+  field :correct_answer, type: String, default: ''
+  field :patient_answer
   field :type, type: String
+
+  attr_protected :text, :choices, :correct_answer, :type, :as => :patient
+
+  embedded_in :questionable, :polymorphic => true
 
   as_enum :type, [:text, :area, :choices]
 
@@ -14,6 +20,11 @@ class Question
 
   before_save :clear_choices, :unless => :choices?
   before_save :remove_blank_choices, :if => :choices?
+
+  def eligible?
+    !correct_answer.present? || correct_answer == patient_answer ||
+        correct_answer.kind_of?(Array) && correct_answer.include?(patient_answer)
+  end
 
   def clear_choices
     self.choices = []

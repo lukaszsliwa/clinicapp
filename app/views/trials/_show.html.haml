@@ -5,11 +5,13 @@
     %table.choices.table.table-hover
       %thead
         %th Question
-        %th Suggested choice
+        %th
+        %th Correct answer
       %tbody
-        - @trial.choices.all.each do |choice|
+        - @trial.questions.all.each do |question|
           %tr
-            %td= choice.question.try :text
-            %td= choice.suggested_value
+            %td= question.text
+            %td= question.choices if question.choices?
+            %td= question.correct_answer
   .modal-footer
     = link_to 'Close', '#', :class => 'btn', :data => {:dismiss => 'modal'}

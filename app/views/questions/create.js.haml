@@ -1,7 +1,0 @@
-$('#new-question-modal').modal('hide');
-$('#new-question-modal').remove();
-- if @question.errors.present?
-  $('body').append('#{escape_javascript(render :partial => 'questions/new', :locals => {:question => @question})}');
-  $('#new-question-modal').modal('show');
-- else
-  $('table.questions tbody').prepend('#{escape_javascript(render :partial => 'questions/question', :object => @question)}');

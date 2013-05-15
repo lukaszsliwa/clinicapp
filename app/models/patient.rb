@@ -28,7 +28,9 @@ class Patient
   scope :name_query, ->(params = {}) do
     where :name => /#{params[:q]}/ unless params[:q].blank?
   end
-  embeds_many :choices, :as => :choiceable, :cascade_callbacks => true
+
+  embeds_many :questions, :as => :questionable
+  accepts_nested_attributes_for :questions
 
   index 'choices.id' => 1
   index({:eligible => 1, :trial_id => 1})
@@ -37,14 +39,12 @@ class Patient
 
   belongs_to :trial
 
-  before_create :copy_choices_from_trial
+  before_create :copy_questions_from_trial
   before_create :generate_token
 
-  def copy_choices_from_trial
-    self.trial.choices.each do |choice|
-      choice = choice.clone
-      choice.copy_question_text
-      self.choices << choice
+  def copy_questions_from_trial
+    self.trial.questions.each do |question|
+      self.questions << question.clone
     end
   end
 
@@ -52,9 +52,10 @@ class Patient
     self.token = SecureRandom.hex
   end
 
-  def eligible_now?
-    choices.all.all? do |choice|
-      choice.eligible?
+  def eligible_now?(from = 0, to = questions.size)
+    return true if from >= to
+    questions.all[from, to].all? do |question|
+      question.eligible?
     end
   end
 

@@ -3,9 +3,9 @@ FactoryGirl.define do
     name { Forgery(:lorem_ipsum).sentences(1, :random => true) }
     start_on { DateTime.yesterday }
     stop_on { DateTime.tomorrow }
-    factory :trial_with_choices do
+    factory :trial_with_questions do
       after :create do |instance|
-        create :choice, :choiceable => instance
+        create :question, :questionable => instance
       end
     end
   end

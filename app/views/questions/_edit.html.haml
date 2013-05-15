@@ -1,8 +1,0 @@
-.modal.hide(id="edit-question-#{@question.id}-modal")
-  .modal-header
-    %h3 Edit question
-  .modal-body
-    = render :partial => 'questions/form'
-  .modal-footer
-    = link_to_function 'Update', %{$('.edit_question').submit()}, :class => 'btn'
-    = link_to 'Close', '#', :class => 'btn', :data => {:dismiss => 'modal'}

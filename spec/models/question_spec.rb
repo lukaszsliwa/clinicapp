@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe Question do
-  subject { create(:choices_question) }
+  let(:trial) { create(:trial) }
+  subject { create(:choices_question, :questionable => trial) }
   describe '#clear_choices' do
     it 'should clear choices' do
       expect {

@@ -1,4 +1,0 @@
-$('#new-trial-modal').modal('hide');
-$('#new-trial-modal').remove();
-$('body').append("#{escape_javascript(render :partial => 'trials/new', :locals => {:trial => @trial})}");
-$('#new-trial-modal').modal('show');

@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Patient do
-  describe '#copy_choices_from_trial' do
-    let(:trial) { create(:trial_with_choices) }
+  describe '#copy_questions_from_trial' do
+    let(:trial) { create(:trial_with_questions) }
     subject{ create(:patient, :trial => trial) }
-    it 'should copy choices from trial' do
-      subject.choices.all.map{|c| c.id = nil; c}.should eql trial.choices.all.map{|c| c.id = nil; c}
+    it 'should copy questions from trial' do
+      subject.questions.all.map{|c| c.id = nil; c}.should eql trial.questions.all.map{|c| c.id = nil; c}
     end
   end
   describe '#generate_token' do
@@ -13,17 +13,17 @@ describe Patient do
     its(:token) { should be_present }
   end
   describe '#eligible_now?' do
-    let(:trial) { create(:trial_with_choices) }
+    let(:trial) { create(:trial_with_questions) }
     subject{ create(:patient, :trial => trial) }
-    context 'when all choices are eligible' do
+    context 'when all questions are eligible' do
       before do
-        Choice.any_instance.stubs(:eligible?).returns(true)
+        Question.any_instance.stubs(:eligible?).returns(true)
       end
       its(:eligible_now?) { should be_true }
     end
-    context 'when some choices are not eligible' do
+    context 'when some questions are not eligible' do
       before do
-        Choice.any_instance.stubs(:eligible?).returns(false)
+        Question.any_instance.stubs(:eligible?).returns(false)
       end
       its(:eligible_now?) { should be_false }
     end
