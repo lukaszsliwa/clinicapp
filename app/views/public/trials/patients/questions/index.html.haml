@@ -17,7 +17,7 @@
         %ul.choices{:style => 'list-style-type: none'}
           - question.choices.each do |value|
             %li.choice
-              = f.check_box :patient_answer, {:multiple => true}, value, nil
+              = f.radio_button :patient_answer, value
               = value.capitalize
       - elsif question.text?
         = f.text_field :patient_answer

@@ -41,8 +41,8 @@ describe Public::Trials::Patients::QuestionsController do
     end
     it 'should update update choices choice' do
       expect {
-        put :update, {:trial_id => trial, :id => @question3, :question => {:patient_answer => %w{A B}}}, {:patient_id => @patient.id}
-      }.to change { Patient.find(@patient.id).questions.find(@question3.id).patient_answer }.to(%w{A B})
+        put :update, {:trial_id => trial, :id => @question3, :question => {:patient_answer => 'A'}}, {:patient_id => @patient.id}
+      }.to change { Patient.find(@patient.id).questions.find(@question3.id).patient_answer }.to('A')
     end
     it 'should redirect back when update_attribute returns false' do
       Question.any_instance.expects(:save).returns false
